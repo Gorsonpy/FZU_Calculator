@@ -2,20 +2,37 @@
  * @Author: gorsonpy
  * @Date: 2023-09-25 19:59:56
  * @LastEditors: gorsonpy
- * @LastEditTime: 2023-09-25 20:47:41
- * @FilePath: \cal\a.html
+ * @LastEditTime: 2023-09-26 23:12:41
+ * @FilePath: \FZU_Calculator\a.html
  * @Description: 
 -->
 <head>
     <link rel="stylesheet" type="text/css" href="b.css">
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+	    tex2jax: {
+	        inlineMath: [['$','$'], ['\\(','\\)']],
+	        processEscapes: true
+	    }
+	});
+    </script>
+      
+    <script type="text/javascript">
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      </script>
+      
+    <!--引入 math.js 文件、用来进行高精度的数学运算-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.0.0/math.js" type="application/javascript"></script>
 </head>
 <body>
 
+
 <div class="center">
-    <h1>HTML CSS, JavaScript 计算器</h1>
+    <h1>$Gorsonpy$ 的 计算器</h1>
     <a href="https://github.com/guuibayer/simple-calculator" target="_blank"><i class="fa fa-github"></i></a>
     <form name="calculator">
-        <input type="button" id="clear" class="btn other" value="C">
+        <input type="button" id="clear" class="btn other" value="CE" onclick="clear();">
         <input type="text" id="display">
             <br>
         <input type="button" class="btn number" value="7" onclick="get(this.value);">
@@ -23,23 +40,72 @@
         <input type="button" class="btn number" value="9" onclick="get(this.value);">
         <input type="button" class="btn operator" value="+" onclick="get(this.value);">
         <input type="button" class="btn operator" value="(" onclick="get(this.value);">
+        <input type="button" class="btn operator" value="log" onclick="get_with_left_bracket(this.value);">
             <br>
         <input type="button" class="btn number" value="4" onclick="get(this.value);">
         <input type="button" class="btn number" value="5" onclick="get(this.value);">
         <input type="button" class="btn number" value="6" onclick="get(this.value);">
         <input type="button" class="btn operator" value="*" onclick="get(this.value);">
         <input type="button" class="btn operator" value=")" onclick="get(this.value);">
+        <input type="button" class="btn operator" value="x^y" onclick="get(this.value);">
             <br>
         <input type="button" class="btn number" value="1" onclick="get(this.value);">
         <input type="button" class="btn number" value="2" onclick="get(this.value);">
         <input type="button" class="btn number" value="3" onclick="get(this.value);">
         <input type="button" class="btn operator" value="-" onclick="get(this.value);">
+        <input type="button" class="btn operator" value="sin" onclick="get_with_left_bracket(this.value);">
             <br>
         <input type="button" class="btn number" value="0" onclick="get(this.value);">
         <input type="button" class="btn operator" value="." onclick="get(this.value);">
         <input type="button" class="btn operator" value="/" onclick="get(this.value);">			
         <input type="button" class="btn other" value="=" onclick="calculates();">
-        <script src="c.js"></script>
+        <input type="button" class="btn operator" value="cos" onclick="get_with_left_bracket(this.value);">
     </form>
 </div>
+
+<script>
+    /*
+ * @Author: gorsonpy
+ * @Date: 2023-09-25 20:18:33
+ * @LastEditors: gorsonpy
+ * @LastEditTime: 2023-09-25 20:30:24
+ * @FilePath: \cal\c.js
+ * @Description: 
+ */
+/* limpa o display */ 
+
+
+// 将默认角度单位设置为度数
+math.config({
+  number: 'BigNumber',
+  precision: 64,
+  angleUnit: 'deg',
+});
+// 现在 Math.js
+
+
+/*切换成角度制*/
+document.getElementById("clear").addEventListener("click", function() {
+	document.getElementById("display").value = "";
+});
+function clear(value){
+    document.getElementById("display").value = "";
+}
+/* recebe os valores */
+function get(value) {
+	document.getElementById("display").value += value; 
+} 
+function get_with_left_bracket(value){
+    document.getElementById("display").value += value; 
+    document.getElementById("display").value += "(";
+}
+
+/* calcula */
+function calculates() {
+	var result = 0;
+	result = document.getElementById("display").value;
+	document.getElementById("display").value = "";
+	document.getElementById("display").value = math.evaluate(result);
+};
+</script>
 </body>
