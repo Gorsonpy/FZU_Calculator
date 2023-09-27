@@ -2,7 +2,7 @@
  * @Author: gorsonpy
  * @Date: 2023-09-27 18:14:34
  * @LastEditors: gorsonpy
- * @LastEditTime: 2023-09-27 20:26:31
+ * @LastEditTime: 2023-09-27 21:11:20
  * @FilePath: \FZU_Calculator\src\index.js
  * @Description: 
  */
@@ -52,7 +52,6 @@ function clearf() {
 }
 function back() {
     str = document.getElementById("display").value;
-    console.log(str);
     document.getElementById("display").value = str.slice(0, -1);
     expression = expression.slice(0, -1);
 }
@@ -106,10 +105,11 @@ function calculates() {
             result = errMsg; // 设置一个错误提示
         }
         document.getElementById("display").value = result;
-        expression = "";
+        expression = result;
     }
 };
 
 module.exports = {
+    get,
     calculates
 }
