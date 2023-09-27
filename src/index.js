@@ -2,7 +2,7 @@
  * @Author: gorsonpy
  * @Date: 2023-09-27 18:14:34
  * @LastEditors: gorsonpy
- * @LastEditTime: 2023-09-27 20:02:36
+ * @LastEditTime: 2023-09-27 20:26:31
  * @FilePath: \FZU_Calculator\src\index.js
  * @Description: 
  */
@@ -109,3 +109,7 @@ function calculates() {
         expression = "";
     }
 };
+
+module.exports = {
+    calculates
+}
