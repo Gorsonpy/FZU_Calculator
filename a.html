@@ -2,7 +2,7 @@
  * @Author: gorsonpy
  * @Date: 2023-09-25 19:59:56
  * @LastEditors: gorsonpy
- * @LastEditTime: 2023-09-27 10:37:56
+ * @LastEditTime: 2023-09-27 11:56:53
  * @FilePath: \FZU_Calculator\a.html
  * @Description: 
 -->
@@ -27,12 +27,12 @@
 </head>
 <body>
 
-
 <div class="center">
     <h1>$Gorsonpy$ 的 计算器</h1>
     <a href="https://github.com/guuibayer/simple-calculator" target="_blank"><i class="fa fa-github"></i></a>
     <form name="calculator">
         <button type="button" id="clear" class="btn other" value="CE" onclick="clear();">$CE$</button>
+        <button type="button" id="clear" class="btn other" value="BACK" onclick="back();">$\leftarrow$</button>
         <input type="text" id="display"> 
             <br>
         <input type="button" class="btn number" value="7" onclick="get(this.value);">
@@ -40,7 +40,8 @@
         <input type="button" class="btn number" value="9" onclick="get(this.value);">
         <input type="button" class="btn operator" value="+" onclick="get(this.value);">
         <input type="button" class="btn operator" value="(" onclick="get(this.value);">
-        <input type="button" class="btn operator" value="log" onclick="get_with_left_bracket(this.value);">
+        <input type="button" class="btn operator" value="ln" onclick="get_with_left_bracket(this.value);">
+        <input type="button" class="btn operator" value="tan" onclick="get_with_left_bracket(this.value);">
             <br>
         <input type="button" class="btn number" value="4" onclick="get(this.value);">
         <input type="button" class="btn number" value="5" onclick="get(this.value);">
@@ -48,6 +49,7 @@
         <input type="button" class="btn operator" value="*" onclick="get(this.value);">
         <input type="button" class="btn operator" value=")" onclick="get(this.value);">
         <button type="button" class="btn operator" value="x^y" onclick="pow(this.value);">$x^y$</button> 
+        <input type="button" class="btn operator" value="asin" onclick="get_with_left_bracket(this.value);">
             <br>
         <input type="button" class="btn number" value="1" onclick="get(this.value);">
         <input type="button" class="btn number" value="2" onclick="get(this.value);">
@@ -55,13 +57,16 @@
         <input type="button" class="btn operator" value="-" onclick="get(this.value);">
         <input type="button" class="btn operator" value="sin" onclick="get_with_left_bracket(this.value);">
         <input type="button" class="btn operator" value="sqrt" onclick="get_with_left_bracket(this.value);">
+        <input type="button" class="btn operator" value="acos" onclick="get_with_left_bracket(this.value);">
             <br>
         <input type="button" class="btn number" value="0" onclick="get(this.value);">
         <input type="button" class="btn operator" value="." onclick="get(this.value);">
         <input type="button" class="btn operator" value="/" onclick="get(this.value);">			
         <input type="button" class="btn other" value="=" onclick="calculates();">
         <input type="button" class="btn operator" value="cos" onclick="get_with_left_bracket(this.value);">
-        <button type="button" class="btn number" value="3.1415926" onclick="get(this.value);">$\pi$</button>
+        <button type="button" class="btn number" value="Π" onclick="get(this.value);">$\pi$</button>
+        <button type="button" class="btn number" value="e" onclick="get(this.value);">$e$</button>
+        <input type="button" class="btn operator" value="atan" onclick="get_with_left_bracket(this.value);">
     </form>
 </div>
 
@@ -81,36 +86,82 @@
 math.config({
   number: 'BigNumber',
   precision: 64,
-  angleUnit: 'deg',
 });
 // 现在 Math.js
 
+const errMsg = "undefined";
+var expression = ""; //实际运算的表达式
 
-/*切换成角度制*/
 document.getElementById("clear").addEventListener("click", function() {
 	document.getElementById("display").value = "";
+    expression = "";
+});
+
+document.getElementById("back").addEventListener("click", function() {
+    str = document.getElementById("display").value;
+    console.log(str);
+	document.getElementById("display").value = str.slice(0, str.length - 2);
+    expression = expression.slice(0, expression.length - 2);
 });
 function clear(value){
     document.getElementById("display").value = "";
+    expression = "";
+}
+function back(value){
+    str = document.getElementById("display").value;
+    console.log(str);
+	document.getElementById("display").value = str.slice(0, str.length() - 2);
+    expression = expression.slice(0, expression.length() - 2);
 }
 /* recebe os valores */
 function get(value) {
+    if(document.getElementById("display").value === errMsg){
+        document.getElementById("display").value = "";
+    }
 	document.getElementById("display").value += value; 
+    expression += value;
 } 
 function pow(value){
+    if(document.getElementById("display").value === errMsg){
+        document.getElementById("display").value = "";
+    }
     document.getElementById("display").value += "^"; 
+    expression += value;
 }
 function get_with_left_bracket(value){
+    if(document.getElementById("display").value === errMsg){
+        document.getElementById("display").value = "";
+    }
     document.getElementById("display").value += value; 
     document.getElementById("display").value += "(";
+    expression += value;
+    expression += "(";
 }
+
+// 创建一个自定义符号表
+const customSymbols = {
+    Π: math.pi,
+    e: math.e,
+};
 
 /* calcula */
 function calculates() {
-	var result = 0;
-	result = document.getElementById("display").value;
 	document.getElementById("display").value = "";
-	document.getElementById("display").value = math.evaluate(result);
+    var result = "";
+
+    if(expression === ""){
+        document.getElementById("display").value = "";
+        expression = "";
+    }else{
+        try{
+            result = math.evaluate(expression, customSymbols);
+        } catch (error) {
+            console.error("An error occurred while evaluating the expression: " + error);
+            result = errMsg; // 设置一个错误提示
+        }
+        document.getElementById("display").value = result;
+        expression = "";
+    }
 };
 </script>
 </body>
