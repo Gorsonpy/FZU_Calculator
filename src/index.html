@@ -2,28 +2,21 @@
  * @Author: gorsonpy
  * @Date: 2023-09-25 19:59:56
  * @LastEditors: gorsonpy
- * @LastEditTime: 2023-09-27 13:16:55
- * @FilePath: \FZU_Calculator\a.html
+ * @LastEditTime: 2023-09-27 14:53:07
+ * @FilePath: \FZU_Calculator\src\index.html
  * @Description: 
 -->
 <head>
     <link rel="stylesheet" type="text/css" href="b.css">
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
     <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-	    tex2jax: {
-	        inlineMath: [['$','$'], ['\\(','\\)']],
-	        processEscapes: true
-	    }
-	});
+      MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+    });
     </script>
-      
-    <script type="text/javascript">
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-      </script>
-      
     <!--引入 math.js 文件、用来进行高精度的数学运算-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.0.0/math.js" type="application/javascript"></script>
+    <script src="math.js" type="application/javascript"></script>
 </head>
 <body>
 
@@ -31,8 +24,8 @@
     <h1>$Gorsonpy$ 的 计算器</h1>
     <a href="https://github.com/guuibayer/simple-calculator" target="_blank"><i class="fa fa-github"></i></a>
     <form name="calculator">
-        <button type="button" id="clear" class="btn other" value="CE" onclick="clear();">$CE$</button>
-        <button type="button" id="clear" class="btn other" value="BACK" onclick="back();">$\leftarrow$</button>
+        <button type="button" id="clear" class="btn other" value="clear" onclick="clear();">$CE$</button>
+        <button type="button" id="clear" class="btn other" value="BACK" onclick="back();">⌫</button>
         <input type="text" id="display"> 
             <br>
         <input type="button" class="btn number" value="7" onclick="get(this.value);">
@@ -67,7 +60,7 @@
         <input type="button" class="btn operator" value="/" onclick="get(this.value);">			
         <input type="button" class="btn other" value="=" onclick="calculates();">
         <input type="button" class="btn operator" value="cos" onclick="get_with_left_bracket(this.value);">
-        <button type="button" class="btn number" value="Π" onclick="get(this.value);">$\pi$</button>
+        <button type="button" class="btn number" value="Π" onclick="get(this.value);">π</button>
         <button type="button" class="btn number" value="e" onclick="get(this.value);">$e$</button>
         <button type="button" class="btn operator" value="x^2" onclick="pow2();">$x^2$</button> 
     </form>

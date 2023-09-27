@@ -38,7 +38,7 @@ form {
 	margin: 40px auto;
 	padding: 40px 0 30px 40px;	
 	width: 500px; /* 调整整个计算器的宽度*/
-	height: 260px;
+	height: 280px;
 }
 .btn {
 	outline: none;
