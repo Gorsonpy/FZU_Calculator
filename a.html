@@ -2,7 +2,7 @@
  * @Author: gorsonpy
  * @Date: 2023-09-25 19:59:56
  * @LastEditors: gorsonpy
- * @LastEditTime: 2023-09-26 23:12:41
+ * @LastEditTime: 2023-09-27 10:37:56
  * @FilePath: \FZU_Calculator\a.html
  * @Description: 
 -->
@@ -32,8 +32,8 @@
     <h1>$Gorsonpy$ 的 计算器</h1>
     <a href="https://github.com/guuibayer/simple-calculator" target="_blank"><i class="fa fa-github"></i></a>
     <form name="calculator">
-        <input type="button" id="clear" class="btn other" value="CE" onclick="clear();">
-        <input type="text" id="display">
+        <button type="button" id="clear" class="btn other" value="CE" onclick="clear();">$CE$</button>
+        <input type="text" id="display"> 
             <br>
         <input type="button" class="btn number" value="7" onclick="get(this.value);">
         <input type="button" class="btn number" value="8" onclick="get(this.value);">
@@ -47,19 +47,21 @@
         <input type="button" class="btn number" value="6" onclick="get(this.value);">
         <input type="button" class="btn operator" value="*" onclick="get(this.value);">
         <input type="button" class="btn operator" value=")" onclick="get(this.value);">
-        <input type="button" class="btn operator" value="x^y" onclick="get(this.value);">
+        <button type="button" class="btn operator" value="x^y" onclick="pow(this.value);">$x^y$</button> 
             <br>
         <input type="button" class="btn number" value="1" onclick="get(this.value);">
         <input type="button" class="btn number" value="2" onclick="get(this.value);">
         <input type="button" class="btn number" value="3" onclick="get(this.value);">
         <input type="button" class="btn operator" value="-" onclick="get(this.value);">
         <input type="button" class="btn operator" value="sin" onclick="get_with_left_bracket(this.value);">
+        <input type="button" class="btn operator" value="sqrt" onclick="get_with_left_bracket(this.value);">
             <br>
         <input type="button" class="btn number" value="0" onclick="get(this.value);">
         <input type="button" class="btn operator" value="." onclick="get(this.value);">
         <input type="button" class="btn operator" value="/" onclick="get(this.value);">			
         <input type="button" class="btn other" value="=" onclick="calculates();">
         <input type="button" class="btn operator" value="cos" onclick="get_with_left_bracket(this.value);">
+        <button type="button" class="btn number" value="3.1415926" onclick="get(this.value);">$\pi$</button>
     </form>
 </div>
 
@@ -95,6 +97,9 @@ function clear(value){
 function get(value) {
 	document.getElementById("display").value += value; 
 } 
+function pow(value){
+    document.getElementById("display").value += "^"; 
+}
 function get_with_left_bracket(value){
     document.getElementById("display").value += value; 
     document.getElementById("display").value += "(";
