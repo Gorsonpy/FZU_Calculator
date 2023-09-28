@@ -2,7 +2,7 @@
  * @Author: gorsonpy
  * @Date: 2023-09-27 18:14:34
  * @LastEditors: gorsonpy
- * @LastEditTime: 2023-09-27 21:11:20
+ * @LastEditTime: 2023-09-28 14:43:16
  * @FilePath: \FZU_Calculator\src\index.js
  * @Description: 
  */
@@ -19,15 +19,14 @@
 // 创建一个自定义符号表
 
 // 将默认角度单位设置为度数
-math.config({
-    number: 'BigNumber',
-    precision: 64,
-});
-const customSymbols = {
-    Π: math.pi,
-    e: math.e,
-};
-/* 这个必须放前面 */
+ math.config({
+     number: 'BigNumber',
+     precision: 64,
+ });
+ const customSymbols = {
+     Π: math.pi,
+     e: math.e,
+ };
 
 
 // 现在 Math.js
@@ -108,8 +107,3 @@ function calculates() {
         expression = result;
     }
 };
-
-module.exports = {
-    get,
-    calculates
-}
