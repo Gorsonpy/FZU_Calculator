@@ -2,7 +2,7 @@
  * @Author: gorsonpy
  * @Date: 2023-09-27 18:14:34
  * @LastEditors: gorsonpy
- * @LastEditTime: 2023-09-28 14:43:16
+ * @LastEditTime: 2023-09-29 00:04:16
  * @FilePath: \FZU_Calculator\src\index.js
  * @Description: 
  */
@@ -104,6 +104,6 @@ function calculates() {
             result = errMsg; // 设置一个错误提示
         }
         document.getElementById("display").value = result;
-        expression = result;
+        expression = document.getElementById("display").value;
     }
 };
